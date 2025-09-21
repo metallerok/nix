@@ -17,6 +17,7 @@ in
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./modules/desktop.nix
     ];
   services.spice-vdagentd.enable = true;
   services.qemuGuest.enable = true;
@@ -46,19 +47,8 @@ in
   # };
 
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "virtio" ];
-
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-
-  services.desktopManager.plasma6.enable = true;
-  
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
-  services.xserver.xkb.options = "caps:escape";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -73,15 +63,6 @@ in
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.administrator = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     packages = with pkgs; [
-       tree
-     ];
-   };
 
   programs.firefox.enable = true;
 
