@@ -1,0 +1,6 @@
+result
+.result
+.direnv/
+*.swp
+secrets/*.age
+secrets/*enc.yaml
