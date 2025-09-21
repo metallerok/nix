@@ -7,5 +7,6 @@
     packages = with pkgs; [
       tree
     ];
+    # initialPassword = "nix";
   };
 }

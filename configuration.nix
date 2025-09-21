@@ -18,6 +18,8 @@ in
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./modules/desktop.nix
+      ./modules/users.nix
+      ./modules/xkb.nix
     ];
   services.spice-vdagentd.enable = true;
   services.qemuGuest.enable = true;
