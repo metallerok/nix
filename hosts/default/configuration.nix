@@ -9,9 +9,10 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       "${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
-      ./disk-config.nix
-      ./modules/xkb.nix
+      ../../disk-config.nix
     ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     boot.resumeDevice = "/dev/mapper/swap-crypted";
     systemd.cryptsetup = {
@@ -73,15 +74,11 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  # users.users.alice = {
-  #   isNormalUser = true;
-  #   extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-  #   packages = with pkgs; [
-  #     tree
-  #   ];
-  # };
 
+  users.users.administrator = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "video" "audio" ];
+  };
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.
@@ -107,6 +104,18 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Enable greetd for niri
+  services.greetd = {
+    enable = true;
+    settings = {
+      terminal.vt = 1;
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
+        user = "greeter";
+      };
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

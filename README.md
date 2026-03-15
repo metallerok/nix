@@ -1,55 +1,114 @@
-# Install
+# NixOS Configuration with Flakes
 
-Before install create a password for luks
+This is a NixOS configuration using flakes, home-manager, and niri window manager.
+
+## Installation
+
+### 1. Boot into NixOS installer
+
+Boot from NixOS installation media and open terminal.
+
+### 2. Create LUKS password
 
 ```bash
-echo "secret_passowrd" > /tmp/secret.key
-```
-
-```bash
+echo "your_password" > /tmp/secret.key
 chmod 600 /tmp/secret.key
 ```
 
-## Clone repo
-```bash
-git clone https://github.com/metallerok/nix.git
-```
-
-
-## Disk Configuration
+### 3. Clone your configuration
 
 ```bash
-cp nix/disk-config.nix /tmp/disk-config.nix
+git clone https://github.com/metallerok/nix.git /tmp/nix
+cd /tmp/nix
 ```
 
-Update the device path in `/tmp/disk-config.nix` according to your disk layout by running `lsblk`
+### 4. Update disk configuration
+
+Find your disk name:
 ```bash
 lsblk
-vim /tmp/disk-config.nix
 ```
 
-After updating, run disko to format and mount the disk:
+Edit `disk-config.nix` and update the device path (line 10):
 ```bash
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/disk-config.nix
+vim disk-config.nix
+# Change: device = "/dev/<device-name>";
+# To: device = "/dev/nvme0n1";  # or /dev/sda, etc.
 ```
 
-Check that the disk is mounted:
+### 5. Format and mount disk with disko
+
+```bash
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/nix/disk-config.nix
+```
+
+Check mount:
 ```bash
 mount | grep /mnt
 ```
 
-Generate the configuration:
+### 6. Generate hardware configuration
+
 ```bash
 nixos-generate-config --no-filesystems --root /mnt
+cp /mnt/etc/nixos/hardware-configuration.nix /tmp/nix/hosts/default/hardware-configuration.nix
 ```
 
-Copy the generated configuration to the target directory:
+### 7. Install system from your flake
+
+**Important**: With flakes, you don't need to copy files to `/etc/nixos/`. Install directly from your git repository:
+
 ```bash
-cp /mnt/etc/nixos/configuration.nix /mnt/etc/nixos/configuration.nix.bak
-cp /tmp/configuration.nix /mnt/etc/nixos/configuration.nix
+sudo nixos-install --flake /tmp/nix/#default
 ```
 
-Copy disk configuration to the target directory:
+### 8. Reboot and configure user
+
 ```bash
-cp /tmp/disk-config.nix /mnt/etc/nixos/disk-config.nix
+reboot
+```
+
+After reboot, login as root and set password:
+```bash
+passwd administrator
+```
+
+### 9. Copy configuration to your home directory
+
+For everyday use:
+
+```bash
+# As administrator user after login
+sudo cp -r /tmp/nix /home/administrator/nix-config
+sudo chown -R administrator:administrator /home/administrator/nix-config
+cd /home/administrator/nix-config
+```
+
+## Usage
+
+### Apply configuration changes
+
+```bash
+sudo nixos-rebuild switch --flake .#default
+```
+
+### Update system
+
+```bash
+sudo nix flake update
+sudo nixos-rebuild switch --flake .#default
+```
+
+### Apply home-manager changes only
+
+```bash
+home-manager switch --flake .#default
+```
+
+## Default User
+
+The default user is `administrator`. Set a password after first boot:
+
+```bash
+passwd administrator
 ```
