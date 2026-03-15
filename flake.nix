@@ -10,7 +10,7 @@
     niri.url = "github:sodiboo/niri-flake";
   };
 
-  outputs = { self, inputs, nixpkgs, home-manager, niri, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, niri, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
