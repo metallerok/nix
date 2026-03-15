@@ -19,7 +19,7 @@
     # File manager
     yazi
     # Browser
-    firefox-wayland
+    firefox
     # Development
     nodejs
     python3
