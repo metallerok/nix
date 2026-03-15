@@ -37,3 +37,19 @@ Check that the disk is mounted:
 ```bash
 mount | grep /mnt
 ```
+
+Generate the configuration:
+```bash
+nixos-generate-config --no-filesystems --root /mnt
+```
+
+Copy the generated configuration to the target directory:
+```bash
+cp /mnt/etc/nixos/configuration.nix /mnt/etc/nixos/configuration.nix.bak
+cp /tmp/configuration.nix /mnt/etc/nixos/configuration.nix
+```
+
+Copy disk configuration to the target directory:
+```bash
+cp /tmp/disk-config.nix /mnt/etc/nixos/disk-config.nix
+```
