@@ -7,7 +7,7 @@
     disk = {
       main = {
         type = "disk";
-        device = "/dev/vdb";
+        device = "/dev/<device-name>";
         content = {
           type = "gpt";
           partitions = {
@@ -23,7 +23,6 @@
             };
             swap = {
               size = "8G";
-              settings.allowDiscards = true;
               content = {
                 type = "luks";
                 name = "swap-crypted";
