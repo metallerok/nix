@@ -14,13 +14,13 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    boot.resumeDevice = "/dev/mapper/swap-crypted";
-    systemd.cryptsetup = {
-      "swap-crypted" = { device = "/dev/disk/by-partlabel/swap"; };
-      "home-crypted" = { device = "/dev/disk/by-partlabel/home"; };
-    };
+  boot.resumeDevice = "/dev/mapper/swap-crypted";
+  boot.initrd.luks.devices = {
+    "swap-crypted" = { device = "/dev/disk/by-partlabel/swap"; };
+    "home-crypted" = { device = "/dev/disk/by-partlabel/home"; };
+  };
 
-    services.spice-vdagentd.enable = true;
+  services.spice-vdagentd.enable = true;
     services.qemuGuest.enable = true;
 
   # Use the systemd-boot EFI boot loader.
