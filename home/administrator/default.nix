@@ -40,8 +40,12 @@
 
   programs.git = {
     enable = true;
-    userName = "Administrator";
-    userEmail = "administrator@local";
+    settings = {
+      user = {
+        name = "Administrator";
+        email = "administrator@local";
+      };
+    };
   };
 
   programs.bash = {

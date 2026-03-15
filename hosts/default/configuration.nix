@@ -14,12 +14,6 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  boot.resumeDevice = "/dev/mapper/swap-crypted";
-  boot.initrd.luks.devices = {
-    "swap-crypted" = { device = "/dev/disk/by-partlabel/swap"; };
-    "home-crypted" = { device = "/dev/disk/by-partlabel/home"; };
-  };
-
   services.spice-vdagentd.enable = true;
     services.qemuGuest.enable = true;
 
@@ -112,7 +106,7 @@
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
         user = "greeter";
       };
     };
