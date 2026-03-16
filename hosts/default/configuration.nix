@@ -133,6 +133,7 @@ in
     source-code-pro
     dejavu_fonts
     font-awesome
+    nerd-fonts.zed-mono
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
