@@ -28,8 +28,6 @@ in
   boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.grub.devices = [ "nodev" ];
 
-  virtualisation.qemu.guest.enable = true;
-
   # networking.hostName = "nixos"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
