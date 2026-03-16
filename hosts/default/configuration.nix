@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, disko, ... }:
+{ config, lib, pkgs, disko, niri, ... }:
 let
   system = config.nixpkgs.system;
 in
@@ -102,7 +102,7 @@ in
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
-    inputs.niri.packages.${system}.default
+    niri.packages.${system}.default
   ];
 
   # Fonts
@@ -131,7 +131,7 @@ in
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${inputs.niri.packages.${system}.default}";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${niri.packages.${system}.default}";
         user = "greeter";
       };
     };
