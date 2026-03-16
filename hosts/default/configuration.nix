@@ -107,6 +107,9 @@ in
     # video drivers
     mesa
     libglvnd
+    fuzzel
+    swaylock
+    nautilus
   ];
 
   hardware.graphics = {
