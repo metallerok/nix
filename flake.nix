@@ -8,8 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     niri.url = "github:sodiboo/niri-flake";
-    disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko = {
+        url = "github:nix-community/disko";
+        inputs.nixpkgs.follows = "nixpkgs";
+    }
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, niri, disko, ... }:

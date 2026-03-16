@@ -73,6 +73,7 @@
   users.users.administrator = {
     isNormalUser = true;
     extraGroups = [ "wheel" "video" "audio" ];
+    initialPassword = "masterkey";
   };
   # programs.firefox.enable = true;
 
@@ -85,6 +86,7 @@
     git
     ripgrep
     unzip
+    bash
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
