@@ -104,7 +104,19 @@ in
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
     niri-pkg
+    # video drivers
+    mesa
+    libglvnd
   ];
+
+  hardware.graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+          vulkan-loader
+          vulkan-validation-layers
+          nvidia-vaapi-driver
+      ];
+  };
 
   # Fonts
   fonts.packages = with pkgs; [

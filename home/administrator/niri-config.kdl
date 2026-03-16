@@ -1,0 +1,31 @@
+// home/administrator/niri-config.kdl
+
+spawn-at-startup "waybar"
+spawn-at-startup "dbus-update-activation-environment" "--all"
+
+environment {
+    WLR_NO_HARDWARE_CURSORS "1"
+    // for NVIDIA:
+    // WLR_RENDERER "vulkan"
+    // NVD_BACKEND "direct"
+}
+
+// Resolution and scaling
+output "*" {
+    scale 1.0
+    // resolution "1920x1080"
+}
+
+input "type:keyboard" {
+    xkb-layout "us,ru"
+    xkb-options "grp:win_space_toggle"
+}
+
+bind {
+    key "Mod+Return" { spawn "alacritty"; }
+    key "Mod+Shift+Q" { close-window; }
+    key "Mod+H" { focus-column-left; }
+    key "Mod+L" { focus-column-right; }
+    key "Mod+J" { focus-window-down; }
+    key "Mod+K" { focus-window-up; }
+}

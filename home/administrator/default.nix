@@ -25,9 +25,14 @@
     python3
   ];
 
+  home.file.".config/niri/config.kdl".source = ./niri-config.kdl;
+
   programs.alacritty = {
     enable = true;
     settings = {
+        env = {
+            TERM = "xterm-256color";
+        };
       font = {
         size = 12.0;
         normal.family = "Source Code Pro";
