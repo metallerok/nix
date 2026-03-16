@@ -30,6 +30,13 @@ git clone https://github.com/metallerok/nix.git /tmp/nix
 cd /tmp/nix
 ```
 
+### Copy disk configuration
+
+```bash
+cp /tmp/nix/disk-config.nix /tmp/disk-config.nix
+```
+
+
 ### 4. Update disk configuration
 
 Find your disk name:
@@ -47,7 +54,7 @@ device = "/dev/nvme0n1";  # or /dev/sda, etc.
 ### 5. Format and mount disk with disko
 
 ```bash
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/nix/disk-config.nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/disk-config.nix
 ```
 
 Check mount:
