@@ -5,6 +5,7 @@
 { config, lib, pkgs, disko, niri, ... }:
 let
   system = config.nixpkgs.system;
+  niri-pkg = niri.packages.${system}.niri-stable;
 in
 {
   imports =
@@ -102,7 +103,7 @@ in
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
-    niri.packages.${system}.default
+    niri-pkg
   ];
 
   # Fonts
@@ -131,7 +132,7 @@ in
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${niri.packages.${system}.default}";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${niri-pkg}/bin/niri-session";
         user = "greeter";
       };
     };
