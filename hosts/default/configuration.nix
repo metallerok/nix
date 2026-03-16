@@ -115,7 +115,15 @@ in
           vulkan-loader
           vulkan-validation-layers
           nvidia-vaapi-driver
+          virtio-vgl
       ];
+  };
+
+  environment.sessionVariables = {
+    WLR_NO_HARDWARE_CURSORS = "1";
+    WLR_RENDERER = "gles2"; # Или "gl", если gles2 не работает
+    # Для NVIDIA в VM обычно не нужно, но для VM на Mac важно
+    LIBVA_DRIVER_NAME = "virtio";
   };
 
   # Fonts
