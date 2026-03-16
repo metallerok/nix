@@ -3,7 +3,9 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 { config, lib, pkgs, disko, ... }:
-
+let
+  system = config.nixpkgs.system;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -47,9 +49,6 @@
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
-
-  # Enable Wayland and Niri
-  programs.niri.enable = true;
 
   # XDG portal for Wayland apps
   xdg.portal = {
@@ -96,8 +95,6 @@
     ripgrep
     unzip
     bash
-    # Niri
-    niri
     # Fonts
     fontconfig
     # Wayland utilities
@@ -105,6 +102,7 @@
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-wlr
+    inputs.niri.packages.${system}.default
   ];
 
   # Fonts
@@ -133,7 +131,7 @@
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${inputs.niri.packages.${system}.default}";
         user = "greeter";
       };
     };

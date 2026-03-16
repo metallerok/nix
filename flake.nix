@@ -7,7 +7,10 @@
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    niri.url = "github:sodiboo/niri-flake";
+    niri = {
+        url = "github:sodiboo/niri-flake";
+        inputs.nixpkgs.follows = "nixpkgs";
+    };
     disko = {
         url = "github:nix-community/disko";
         inputs.nixpkgs.follows = "nixpkgs";
