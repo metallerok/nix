@@ -3,6 +3,31 @@
 {
   home.stateVersion = "25.11";
 
+  # Wayland home manager config
+  wayland.windowManager.niri = {
+    enable = true;
+    settings = {
+      input = {
+        keyboard = {
+          repeat-delay = 300;
+          repeat-rate = 50;
+        };
+      };
+      outputs = {
+        "eDP-1" = {
+          scale = 1.0;
+        };
+      };
+      gaps = 8;
+      border = {
+        width = 1;
+      };
+      spawn-at-startup = [
+        { command = [ "waybar" ]; }
+      ];
+    };
+  };
+
   home.packages = with pkgs; [
     # Basic utilities
     tree
@@ -60,5 +85,13 @@
       # PATH additions
       export PATH="$HOME/.local/bin:$PATH"
     '';
+  };
+
+  # Environment variables for Wayland
+  home.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+    QT_QPA_PLATFORM = "wayland";
+    SDL_VIDEODRIVER = "wayland";
+    _JAVA_AWT_WM_NONREPARENTING = "1";
   };
 }

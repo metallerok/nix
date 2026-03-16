@@ -38,15 +38,27 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
 
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
+
+  # Enable Wayland and Niri
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
+
+  # XDG portal for Wayland apps
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
 
 
@@ -78,7 +90,7 @@
   # programs.firefox.enable = true;
 
   # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
+  # You can use https://search.nixos.org to find out more packages.
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -87,6 +99,20 @@
     ripgrep
     unzip
     bash
+    # Fonts
+    fontconfig
+    # Wayland utilities
+    xdg-utils
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
+  ];
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    source-code-pro
+    dejavu-fonts-liberation
+    font-awesome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -108,7 +134,7 @@
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${config.programs.niri.package}/bin/niri-session";
         user = "greeter";
       };
     };
