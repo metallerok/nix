@@ -122,9 +122,7 @@ in
 
   environment.sessionVariables = {
       WLR_NO_HARDWARE_CURSORS = "1";
-      WLR_RENDERER = "gles2";       # Или "gl"
       LIBGL_ALWAYS_SOFTWARE = "1";  # Software rendering для стабильности
-      MESA_LOADER_DRIVER_OVERRIDE = "zink"; # Для VM на macOS (UTM)
   };
 
   # Fonts
