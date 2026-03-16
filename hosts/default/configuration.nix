@@ -109,7 +109,7 @@ in
   # Fonts
   fonts.packages = with pkgs; [
     source-code-pro
-    dejavu-fonts-liberation
+    dejavu-fonts
     font-awesome
   ];
 
