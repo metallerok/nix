@@ -21,7 +21,7 @@
     in {
       nixosConfigurations.default = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs disko; };
+        specialArgs = { inherit inputs disko niri; };
         modules = [
           ./hosts/default/configuration.nix
           ./hosts/default/hardware-configuration.nix
@@ -31,7 +31,6 @@
             home-manager.useUserPackages = true;
             home-manager.users.administrator = ./home/administrator;
           }
-          niri.nixosModules.niri
         ];
       };
     };

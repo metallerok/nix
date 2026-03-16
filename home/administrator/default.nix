@@ -3,31 +3,6 @@
 {
   home.stateVersion = "25.11";
 
-  # Wayland home manager config
-  wayland.windowManager.niri = {
-    enable = true;
-    settings = {
-      input = {
-        keyboard = {
-          repeat-delay = 300;
-          repeat-rate = 50;
-        };
-      };
-      outputs = {
-        "eDP-1" = {
-          scale = 1.0;
-        };
-      };
-      gaps = 8;
-      border = {
-        width = 1;
-      };
-      spawn-at-startup = [
-        { command = [ "waybar" ]; }
-      ];
-    };
-  };
-
   home.packages = with pkgs; [
     # Basic utilities
     tree

@@ -49,10 +49,7 @@
   # services.xserver.enable = true;
 
   # Enable Wayland and Niri
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-  };
+  programs.niri.enable = true;
 
   # XDG portal for Wayland apps
   xdg.portal = {
@@ -99,6 +96,8 @@
     ripgrep
     unzip
     bash
+    # Niri
+    niri
     # Fonts
     fontconfig
     # Wayland utilities
@@ -134,7 +133,7 @@
     settings = {
       terminal.vt = 1;
       default_session = {
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${config.programs.niri.package}/bin/niri-session";
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session";
         user = "greeter";
       };
     };

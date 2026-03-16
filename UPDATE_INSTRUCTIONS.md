@@ -32,11 +32,11 @@ sudo nixos-rebuild switch --flake .#default
 ### Шаг 3: Обновление Home Manager конфигурации
 
 ```bash
-# Обновить home manager конфигурацию
-home-manager switch --flake .#default@administrator
+# Обновить home manager конфигурацию (изнутри системы)
+home-manager switch
 
-# Или просто:
-# home-manager switch
+# Или если нужно указать flake:
+# home-manager switch --flake .#administrator
 ```
 
 ### Шаг 4: Перезагрузка (если необходимо)
@@ -61,7 +61,7 @@ git pull
 sudo nixos-rebuild switch --flake .#default
 
 # Обновить home manager
-home-manager switch --flake .#default@administrator
+home-manager switch
 ```
 
 ## Откат изменений
