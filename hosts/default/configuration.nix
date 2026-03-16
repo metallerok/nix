@@ -28,6 +28,8 @@ in
   boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.grub.devices = [ "nodev" ];
 
+  virtualisation.qemu.guest.enable = true;
+
   # networking.hostName = "nixos"; # Define your hostname.
 
   # Configure network connections interactively with nmcli or nmtui.
@@ -115,15 +117,16 @@ in
           vulkan-loader
           vulkan-validation-layers
           nvidia-vaapi-driver
-          virtio-vgl
+          virglrenderer
+          libva
       ];
   };
 
   environment.sessionVariables = {
-    WLR_NO_HARDWARE_CURSORS = "1";
-    WLR_RENDERER = "gles2"; # Или "gl", если gles2 не работает
-    # Для NVIDIA в VM обычно не нужно, но для VM на Mac важно
-    LIBVA_DRIVER_NAME = "virtio";
+      WLR_NO_HARDWARE_CURSORS = "1";
+      WLR_RENDERER = "gles2";       # Или "gl"
+      LIBGL_ALWAYS_SOFTWARE = "1";  # Software rendering для стабильности
+      MESA_LOADER_DRIVER_OVERRIDE = "zink"; # Для VM на macOS (UTM)
   };
 
   # Fonts
