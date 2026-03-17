@@ -2,36 +2,36 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
-
+{ config, lib, pkgs, disko, niri, ... }:
 let
-  lazyvimStarter = pkgs.fetchFromGitHub {
-   owner = "LazyVim";   
-   repo = "starter";	
-   rev = "803bc18";
-   sha256 = "sha256-QrpnlDD4r1X4C8PqBhQ+S3ar5C+qDrU1Jm/lPqyMIFM=";
-  };
-  user = "administrator";
+  system = config.nixpkgs.system;
+  niri-pkg = niri.packages.${system}.niri-stable;
 in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./modules/desktop.nix
-      ./modules/users.nix
-      ./modules/xkb.nix
+      disko.nixosModules.disko
+      ../../disk-config.nix
     ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   services.spice-vdagentd.enable = true;
-  services.qemuGuest.enable = true;
+    services.qemuGuest.enable = true;
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # boot.loader.systemd-boot.enable = true;
+  # boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub.devices = [ "nodev" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  # networking.hostName = "nixos"; # Define your hostname.
+
+  # Configure network connections interactively with nmcli or nmtui.
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
@@ -41,16 +41,28 @@ in
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    # keyMap = "us";
+    useXkbConfig = true; # use xkb.options in tty.
+  };
+
+  # Enable the X11 windowing system.
+  # services.xserver.enable = true;
+
+  # XDG portal for Wayland apps
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
+
+
 
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
+  # services.xserver.xkb.options = "eurosign:e,caps:escape";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -66,10 +78,16 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.libinput.enable = true;
 
-  programs.firefox.enable = true;
+
+  users.users.administrator = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "video" "audio" ];
+    initialPassword = "masterkey";
+  };
+  # programs.firefox.enable = true;
 
   # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
+  # You can use https://search.nixos.org to find out more packages.
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
@@ -77,11 +95,46 @@ in
     git
     ripgrep
     unzip
-    fzf
-    nodejs
-    python3
-    pkgs.nerd-fonts.jetbrains-mono
-   ];
+    bash
+    # Fonts
+    fontconfig
+    # Wayland utilities
+    xdg-utils
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-wlr
+    niri-pkg
+    # video drivers
+    mesa
+    libglvnd
+    fuzzel
+    swaylock
+    nautilus
+  ];
+
+  hardware.graphics = {
+      enable = true;
+      extraPackages = with pkgs; [
+          vulkan-loader
+          vulkan-validation-layers
+          nvidia-vaapi-driver
+          virglrenderer
+          libva
+      ];
+  };
+
+  environment.sessionVariables = {
+      WLR_NO_HARDWARE_CURSORS = "1";
+      LIBGL_ALWAYS_SOFTWARE = "1";  # Software rendering для стабильности
+  };
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    source-code-pro
+    dejavu_fonts
+    font-awesome
+    nerd-fonts.zed-mono
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -91,47 +144,28 @@ in
   #   enableSSHSupport = true;
   # };
 
-  environment.etc."opt/lazyvim-starter".source = lazyvimStarter;
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true; 
-    viAlias = true;
-    vimAlias = true;
-
-    configure = {
-      customRC = ''
-        set number
-        set tabstop=2
-        set expandtab
-        set softtabstop=2
-        set shiftwidth=2
-      '';
-
-      # packages.myVimPackage = with pkgs.vimPlugins; {
-      #  start = [ lazy-nvim ];
-      # };
-    };
-  };
-    systemd.tmpfiles.rules = [
-      ''C /home/${user}/.config/nvim 700 ${user} users - /etc/opt/lazyvim-starter''
-      ''Z /home/${user}/.config/nvim - ${user} users - -''
-    ];
-
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  # Enable greetd for niri
+  services.greetd = {
+    enable = true;
+    settings = {
+      terminal.vt = 1;
+      default_session = {
+        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd ${niri-pkg}/bin/niri-session";
+        user = "greeter";
+      };
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  system.copySystemConfiguration = true;
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
@@ -150,7 +184,6 @@ in
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
 }
-
