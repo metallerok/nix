@@ -29,6 +29,12 @@ Find your disk name:
 lsblk
 ```
 
+### Copy disk configuration
+
+```bash
+cp /tmp/nix/hosts/{hostname}/disk-config.nix /tmp/disk-config.nix
+```
+
 Edit `disk-config.nix` and update the device path (line 10):
 ```bash
 vim disk-config.nix
@@ -39,7 +45,7 @@ vim disk-config.nix
 ### 5. Format and mount disk with disko
 
 ```bash
-sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/nix/disk-config.nix
+sudo nix --experimental-features "nix-command flakes" run github:nix-community/disko/latest -- --mode destroy,format,mount /tmp/disk-config.nix
 ```
 
 Check mount:
@@ -51,7 +57,7 @@ mount | grep /mnt
 
 ```bash
 nixos-generate-config --no-filesystems --root /mnt
-cp /mnt/etc/nixos/hardware-configuration.nix /tmp/nix/hosts/default/hardware-configuration.nix
+cp /mnt/etc/nixos/hardware-configuration.nix /tmp/nix/hosts/{hostname}/hardware-configuration.nix
 ```
 
 ### 7. Install system from your flake
@@ -59,7 +65,7 @@ cp /mnt/etc/nixos/hardware-configuration.nix /tmp/nix/hosts/default/hardware-con
 **Important**: With flakes, you don't need to copy files to `/etc/nixos/`. Install directly from your git repository:
 
 ```bash
-sudo nixos-install --flake /tmp/nix/#default
+sudo nixos-install --flake /tmp/nix/#{hostname}
 ```
 
 ### 8. Reboot and configure user
