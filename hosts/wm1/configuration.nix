@@ -23,10 +23,11 @@ in
   # Use the systemd-boot EFI boot loader.
   # boot.loader.systemd-boot.enable = true;
   # boot.loader.efi.canTouchEfiVariables = true;
+
   boot.loader.grub.enable = true;
-  boot.loader.grub.efiSupport = true;
-  boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.grub.devices = [ "nodev" ];
+  boot.loader.grub.efiSupport = false;
+  boot.loader.grub.efiInstallAsRemovable = false;
+  boot.loader.grub.devices = [ "/dev/vda" ];
 
   # networking.hostName = "nixos"; # Define your hostname.
 

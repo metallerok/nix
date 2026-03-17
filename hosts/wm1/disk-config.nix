@@ -9,11 +9,15 @@
         type = "disk";
         device = "/dev/vda"; # lsblk to check actual device name
         content = {
-          type = "mbr";
+          type = "gpt";
           partitions = {
+            bios_boot = {
+              size = "1M";
+              type = "EF02"; # BIOS boot
+              content = { type = "gpt_bios_boot"; };
+            };
             boot = {
               size = "500M";
-              type = "primary";
               content = {
                 type = "filesystem";
                 format = "ext4";
@@ -22,7 +26,6 @@
             };
             swap = {
               size = "4G";
-              type = "primary";
               content = {
                 type = "luks";
                 name = "swap-crypted";
@@ -35,7 +38,6 @@
             };
             root = {
               size = "25G";
-              type = "primary";
               content = {
                 type = "filesystem";
                 format = "ext4";
@@ -44,7 +46,6 @@
             };
             home = {
               size = "100%";
-              type = "primary";
               content = {
                 type = "luks";
                 name = "home-crypted";
