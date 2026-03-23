@@ -25,7 +25,7 @@
 
         input = {
          keyboard.xkb.layout = "us,ru";
-         keyboard.xkb.options = "grp:alt_shift_toggle,cpas:escape";
+         keyboard.xkb.options = "grp:alt_shift_toggle,caps:escape";
          
          keyboard.repeat-rate = 40;
          keyboard.repeat-delay = 250;

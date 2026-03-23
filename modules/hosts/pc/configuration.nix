@@ -2,8 +2,9 @@
 
   flake.nixosModules.pcConfiguration = { pkgs, lib, ... }: 
 	let
+	  system = pkgs.stdenv.hostPlatform.system;
 	  pkgsUnstable = import inputs.nixpkgs-unstable {
-	    system = pkgs.stdenv.hostPlatform.system;
+	    system = system;
 	    config.allowUnfree = true;
 	  };
 	in
@@ -52,6 +53,9 @@
 
     # Enable the GNOME Desktop Environment.
     services.displayManager.gdm.enable = true;
+    services.displayManager.sessionPackages = [
+      self.packages.${system}.myNiri
+    ];
     services.desktopManager.gnome.enable = true;
 
     # Configure keymap in X11
