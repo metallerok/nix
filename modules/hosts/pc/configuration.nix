@@ -1,12 +1,11 @@
 { self, inputs, ... }: {
-
   flake.nixosModules.pcConfiguration = { pkgs, lib, ... }: 
 	let
 	    system = pkgs.stdenv.hostPlatform.system;
-	  pkgsUnstable = import inputs.nixpkgs-unstable {
-	    system = pkgs.stdenv.hostPlatform.system;
-	    config.allowUnfree = true;
-	  };
+      pkgsUnstable = import inputs.nixpkgs-unstable {
+        system = pkgs.stdenv.hostPlatform.system;
+        config.allowUnfree = true;
+      };
 	in
   {
     imports = [
@@ -69,16 +68,14 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      # If you want to use JACK applications, uncomment this
-      #jack.enable = true;
+      #jack.enable = true; # if you want use JACK apps
 
       # use the example session manager (no others are packaged yet so this is enabled by default,
       # no need to redefine it in your config for now)
       #media-session.enable = true;
     };
 
-    # Enable touchpad support (enabled default in most desktopManager).
-    # services.xserver.libinput.enable = true;
+    # services.xserver.libinput.enable = true; # touchpad support (enabled default in most dm)  
 
     users.users.administrator = {
       isNormalUser = true;
@@ -137,6 +134,5 @@
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system.stateVersion = "25.11"; # Did you read the comment?
-
   };
 }

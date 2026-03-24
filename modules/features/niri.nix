@@ -12,7 +12,6 @@
       pkgsUnstable = import inputs.nixpkgs-unstable {
         inherit system;
       };
-      _debug = builtins.trace "niri version: ${pkgsUnstable.niri.version or "unknown"}" null;
     in 
     inputs.wrapper-modules.wrappers.niri.wrap {
       inherit pkgs;
@@ -31,12 +30,12 @@
          keyboard.repeat-delay = 250;
         };
 
-        layout.gaps = 5;
+        layout.gaps = 3;
         
         binds = {
           "Mod+Shift+Slash".show-hotkey-overlay = null;
-	  "Mod+Return".spawn-sh = lib.getExe pkgs.alacritty;
-	  "Mod+Q".close-window = null;
+          "Mod+Return".spawn-sh = lib.getExe pkgs.alacritty;
+          "Mod+Q".close-window = null;
           "Mod+D".spawn-sh = lib.getExe pkgs.fuzzel;
           "Super+Alt+L".spawn-sh = lib.getExe pkgs.swaylock;
           "Mod+O".toggle-overview = null;
@@ -85,7 +84,6 @@
           "Mod+Shift+0".move-column-to-workspace = "w9";
         };
       };
-
     };
   };
 }
