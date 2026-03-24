@@ -118,3 +118,13 @@ The default user is `administrator`. Set a password after first boot:
 ```bash
 passwd administrator
 ```
+
+## Setup unstable branch CLI alias
+```bash
+nix registry pin nixpkgs-unstable github:nixos/nixpkgs/nixos-unstable
+```
+
+## Run something from unstable
+```bash
+nix run github:NixOS/nixpkgs/nixos-unstable#noctalia-shell
+```
