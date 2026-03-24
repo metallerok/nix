@@ -1,15 +1,20 @@
-{ config, pkgs, pkgs-unstable, ...}: {
+{ config, pkgs, pkgs-unstable, ...}:
+let
+  myHiddify = import ../../packages/hiddify.nix { inherit pkgs; };
+in
+{
   home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
     wl-clipboard
     python3
-    zed-editor
     pgadmin4-desktopmode
     obsidian
     zellij
+    myHiddify
   ] ++ [
       pkgs-unstable.opencode
+      pkgs-unstable.zed-editor
   ];
 
   programs.alacritty = {

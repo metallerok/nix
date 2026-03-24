@@ -28,10 +28,6 @@
     };
     programs.nix-ld = {
       enable = true;
-      libraries = with pkgs; [
-        libepoxy
-        zstd
-      ];
     };
 
     boot.loader.systemd-boot.enable = true;
@@ -136,10 +132,11 @@
        htop
        tree
        fuzzel
-       swaylock
        alacritty
        fish
-       pkgsUnstable.keepassxc
+       nix-ld
+    ] ++ [
+      pkgsUnstable.keepassxc
     ];
 
     # Some programs need SUID wrappers, can be configured further or are

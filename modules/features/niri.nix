@@ -7,6 +7,7 @@
   };
 
   perSystem = { pkgs, lib, self', system, ... }: {
+    packages.myHiddify = import ../../packages/hiddify.nix { inherit pkgs; };
     packages.myNiri =
     let
       pkgsUnstable = import inputs.nixpkgs-unstable {
@@ -22,6 +23,7 @@
       settings = {
         spawn-at-startup = [
           [ (lib.getExe self'.packages.myNoctalia) ]
+          [ (lib.getExe self'.packages.myHiddify) ]
         ];
 
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
@@ -42,7 +44,7 @@
           "Mod+Q".close-window = null;
           "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+D".spawn-sh = lib.getExe pkgs.fuzzel;
-          "Super+Alt+L".spawn-sh = lib.getExe pkgs.swaylock;
+          "Super+Alt+L".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call lockScreen toggle";
           "Mod+O".toggle-overview = null;
           "Print".screenshot = null;
 

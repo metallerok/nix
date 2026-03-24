@@ -113,7 +113,10 @@
             "drawerEnabled": true,
             "hidePassive": false,
             "id": "Tray",
-            "pinned": []
+            "pinned": [
+              "cyXfAae-YR",
+              "_5pCcTOMuX"
+            ]
           },
           {
             "deviceNativePath": "__default__",
@@ -136,6 +139,13 @@
             "displayMode": "onhover",
             "iconColor": "none",
             "id": "Brightness",
+            "textColor": "none"
+          },
+          {
+            "displayMode": "forceOpen",
+            "iconColor": "none",
+            "id": "KeyboardLayout",
+            "showIcon": true,
             "textColor": "none"
           },
           {
@@ -266,7 +276,7 @@
       "settingsPanelSideBarCardStyle": false
     },
     "location": {
-      "name": "Russia, Penza",
+      "name": "Penza, Russia",
       "weatherEnabled": true,
       "weatherShowEffects": true,
       "useFahrenheit": false,
@@ -456,7 +466,10 @@
       "size": 1,
       "onlySameOutput": true,
       "monitors": [],
-      "pinnedApps": [],
+      "pinnedApps": [
+        "org.gnome.Nautilus",
+        "firefox"
+      ],
       "colorizeIcons": false,
       "showLauncherIcon": false,
       "launcherPosition": "end",
@@ -679,7 +692,9 @@
     "barVisible": true,
     "openedPanel": "",
     "lockScreenActive": false,
-    "wallpapers": {},
+    "wallpapers": {
+      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/forest_castle.png"
+    },
     "desktopWidgetsEditMode": false,
     "display": {
       "HDMI-A-1": {
