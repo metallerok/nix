@@ -4,6 +4,11 @@
   home.packages = with pkgs; [
     wl-clipboard
     python3
+    zed-editor
+    opencode
+    pgadmin4-desktopmode
+    obsidian
+    zellij
   ];
 
   programs.alacritty = {
@@ -13,8 +18,8 @@
           TERM = "xterm-256color";
       };
       font = {
-        size = 12.0;
-        normal.family = "Source Code Pro";
+        size = 13.0;
+        normal.family = "JetBrains Mono";
       };
       window = {
         decorations = "none";

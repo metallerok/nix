@@ -16,6 +16,24 @@
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
+    programs.appimage = {
+      enable = true;
+      binfmt = true;
+      package = pkgs.appimage-run.override {
+        extraPkgs = pkgs: with pkgs; [
+          zstd
+          libepoxy
+        ];
+      };
+    };
+    programs.nix-ld = {
+      enable = true;
+      libraries = with pkgs; [
+        libepoxy
+        zstd
+      ];
+    };
+
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
@@ -44,6 +62,14 @@
       LC_TELEPHONE = "ru_RU.UTF-8";
       LC_TIME = "ru_RU.UTF-8";
     };
+
+    fonts.packages = with pkgs; [
+      source-code-pro
+      dejavu_fonts
+      font-awesome
+      nerd-fonts.zed-mono
+      jetbrains-mono
+    ];
 
     services.xserver.enable = true;
 
@@ -92,6 +118,7 @@
     programs.firefox.enable = true;
     programs.vim.enable = true;
     programs.vim.defaultEditor = true;
+    programs.amnezia-vpn.enable = true;
 
     nixpkgs.config.allowUnfree = true;
 
