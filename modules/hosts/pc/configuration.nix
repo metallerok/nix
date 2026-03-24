@@ -1,10 +1,10 @@
-{ self, inputs, system, ... }: {
+{ self, inputs, ... }: {
 
   flake.nixosModules.pcConfiguration = { pkgs, lib, ... }: 
 	let
-	  system = pkgs.stdenv.hostPlatform.system;
+	    system = pkgs.stdenv.hostPlatform.system;
 	  pkgsUnstable = import inputs.nixpkgs-unstable {
-	    system = system;
+	    system = pkgs.stdenv.hostPlatform.system;
 	    config.allowUnfree = true;
 	  };
 	in
@@ -12,11 +12,11 @@
     imports = [
       self.nixosModules.pcHardware
       self.nixosModules.niri
+      inputs.home-manager.nixosModules.home-manager
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    # Bootloader.
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
@@ -27,10 +27,8 @@
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-    # Enable networking
     networking.networkmanager.enable = true;
 
-    # Set your time zone.
     time.timeZone = "Europe/Moscow";
 
     # Select internationalisation properties.
@@ -48,27 +46,22 @@
       LC_TIME = "ru_RU.UTF-8";
     };
 
-    # Enable the X11 windowing system.
     services.xserver.enable = true;
 
-    # Enable the GNOME Desktop Environment.
     services.displayManager.gdm.enable = true;
     services.displayManager.sessionPackages = [
       self.packages.${system}.myNiri
     ];
     services.desktopManager.gnome.enable = true;
 
-    # Configure keymap in X11
     services.xserver.xkb = {
       layout = "us,ru";
       variant = "";
       options = "grp:alt_shift_toggle,caps:escape";
     };
 
-    # Enable CUPS to print documents.
     services.printing.enable = true;
 
-    # Enable sound with pipewire.
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
@@ -87,21 +80,24 @@
     # Enable touchpad support (enabled default in most desktopManager).
     # services.xserver.libinput.enable = true;
 
-    # Define a user account. Don't forget to set a password with ‘passwd’.
     users.users.administrator = {
       isNormalUser = true;
       description = "Gosha";
       extraGroups = [ "networkmanager" "wheel" ];
       packages = with pkgs; [
-      #  thunderbird
       ];
     };
 
+    home-manager.useGlobalPkgs = true;
+    home-manager.useUserPackages = true;
+    home-manager.users.administrator = ../../../home/administrator/default.nix;
+
     programs.firefox.enable = true;
+    programs.vim.enable = true;
+    programs.vim.defaultEditor = true;
 
     nixpkgs.config.allowUnfree = true;
 
-    # List packages installed in system profile. To search, run:
     # $ nix search wget
     environment.systemPackages = with pkgs; [
        wget
@@ -126,7 +122,6 @@
 
     # List services that you want to enable:
 
-    # Enable the OpenSSH daemon.
     services.openssh.enable = true;
 
     # Open ports in the firewall.
