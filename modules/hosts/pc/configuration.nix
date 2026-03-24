@@ -1,5 +1,5 @@
 { self, inputs, ... }: {
-  flake.nixosModules.pcConfiguration = { pkgs, lib, ... }: 
+  flake.nixosModules.pcConfiguration = { pkgs, lib, ... }:
 	let
 	    system = pkgs.stdenv.hostPlatform.system;
       pkgsUnstable = import inputs.nixpkgs-unstable {
@@ -101,24 +101,29 @@
       #media-session.enable = true;
     };
 
-    # services.xserver.libinput.enable = true; # touchpad support (enabled default in most dm)  
+    # services.xserver.libinput.enable = true; # touchpad support (enabled default in most dm)
 
     users.users.administrator = {
       isNormalUser = true;
       description = "Gosha";
       extraGroups = [ "networkmanager" "wheel" ];
+      shell = pkgs.fish;
       packages = with pkgs; [
       ];
     };
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
-    home-manager.users.administrator = ../../../home/administrator/default.nix;
+    home-manager.users.administrator = { pkgs, lib, ... }: {
+        imports = [ ../../../home/administrator/default.nix ];
+        _module.args.pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+    };
 
     programs.firefox.enable = true;
     programs.vim.enable = true;
     programs.vim.defaultEditor = true;
     programs.amnezia-vpn.enable = true;
+    programs.fish.enable = true;
 
     nixpkgs.config.allowUnfree = true;
 
@@ -133,6 +138,7 @@
        fuzzel
        swaylock
        alacritty
+       fish
        pkgsUnstable.keepassxc
     ];
 

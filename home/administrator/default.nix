@@ -1,14 +1,15 @@
-{ config, pkgs, ...}: {
+{ config, pkgs, pkgs-unstable, ...}: {
   home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
     wl-clipboard
     python3
     zed-editor
-    opencode
     pgadmin4-desktopmode
     obsidian
     zellij
+  ] ++ [
+      pkgs-unstable.opencode
   ];
 
   programs.alacritty = {
@@ -51,10 +52,25 @@
     '';
   };
 
-  programs.bash = {
+  # programs.bash = {
+  #   enable = true;
+  #   bashrcExtra = ''
+  #     export PATH="$HOME/.local/bin:$PATH"
+  #   '';
+  # };
+
+  programs.fish = {
     enable = true;
-    bashrcExtra = ''
-      export PATH="$HOME/.local/bin:$PATH"
+    shellInit = ''
+      fish_add_path ~/.local/bin
     '';
+    shellAliases = {
+      ls = "ls --color=auto";
+      ll = "ls -la";
+      la = "ls -A";
+    };
+    plugins = [
+      # { name = "autopair"; src = pkgs.fishPlugins.autopair; }
+    ];
   };
 }
