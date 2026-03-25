@@ -4,3 +4,4 @@ result
 *.swp
 secrets/*.age
 secrets/*enc.yaml
+.current_problem.md

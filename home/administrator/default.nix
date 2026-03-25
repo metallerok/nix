@@ -1,4 +1,4 @@
-{ config, pkgs, pkgs-unstable, ...}:
+{ pkgs, pkgs-unstable, ...}:
 let
   myHiddify = import ../../packages/hiddify.nix { inherit pkgs; };
 in
@@ -12,6 +12,9 @@ in
     obsidian
     zellij
     myHiddify
+    # LSP
+    nil
+    nixd
   ] ++ [
       pkgs-unstable.opencode
       pkgs-unstable.zed-editor
