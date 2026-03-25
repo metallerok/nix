@@ -132,4 +132,5 @@ nix run github:NixOS/nixpkgs/nixos-unstable#noctalia-shell
 ## Update Noctalia Shell config
 ```bash
 nix run .#myNoctalia ipc call state all > ./modules/features/noctalia.json
+nix run nixpkgs-unstable#noctalia-shell ipc call state all > ./modules/features/noctalia.json
 ```

@@ -114,8 +114,7 @@
             "hidePassive": false,
             "id": "Tray",
             "pinned": [
-              "cyXfAae-YR",
-              "_5pCcTOMuX"
+              "hiddify"
             ]
           },
           {
@@ -468,7 +467,9 @@
       "monitors": [],
       "pinnedApps": [
         "org.gnome.Nautilus",
-        "firefox"
+        "firefox",
+        "dev.zed.Zed",
+        "hiddify"
       ],
       "colorizeIcons": false,
       "showLauncherIcon": false,
