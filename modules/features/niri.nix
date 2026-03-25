@@ -23,7 +23,7 @@
       settings = {
         spawn-at-startup = [
           [ (lib.getExe self'.packages.myNoctalia) ]
-          [ (lib.getExe self'.packages.myHiddify) ]
+          # [ (lib.getExe self'.packages.myHiddify) ]
         ];
 
         xwayland-satellite.path = lib.getExe pkgs.xwayland-satellite;
@@ -47,7 +47,7 @@
 
         binds = {
           "Mod+Shift+Slash".show-hotkey-overlay = null;
-          "Mod+Return".spawn-sh = lib.getExe pkgs.alacritty;
+          "Mod+Return".spawn-sh = lib.getExe pkgs.ghostty;
           "Mod+Q".close-window = null;
           "Mod+S".spawn-sh = "${lib.getExe self'.packages.myNoctalia} ipc call launcher toggle";
           "Mod+D".spawn-sh = lib.getExe pkgs.fuzzel;

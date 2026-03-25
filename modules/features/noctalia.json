@@ -114,7 +114,8 @@
             "hidePassive": false,
             "id": "Tray",
             "pinned": [
-              "hiddify"
+              "hiddify",
+              "AmneziaVPN"
             ]
           },
           {
@@ -131,13 +132,6 @@
             "iconColor": "none",
             "id": "Volume",
             "middleClickCommand": "pwvucontrol || pavucontrol",
-            "textColor": "none"
-          },
-          {
-            "applyToAllMonitors": false,
-            "displayMode": "onhover",
-            "iconColor": "none",
-            "id": "Brightness",
             "textColor": "none"
           },
           {
@@ -168,6 +162,12 @@
             "textColor": "none",
             "useMonospaceFont": true,
             "usePadding": false
+          },
+          {
+            "displayMode": "onhover",
+            "iconColor": "none",
+            "id": "VPN",
+            "textColor": "none"
           },
           {
             "displayMode": "onhover",
@@ -223,7 +223,7 @@
       "language": "",
       "allowPanelsOnScreenWithoutBar": true,
       "showChangelogOnStartup": true,
-      "telemetryEnabled": false,
+      "telemetryEnabled": true,
       "enableLockScreenCountdown": true,
       "lockScreenCountdownDuration": 10000,
       "autoStartAuth": false,
@@ -276,7 +276,7 @@
     },
     "location": {
       "name": "Penza, Russia",
-      "weatherEnabled": true,
+      "weatherEnabled": false,
       "weatherShowEffects": true,
       "useFahrenheit": false,
       "use12hourFormat": false,
@@ -299,7 +299,7 @@
           "id": "calendar-month-card"
         },
         {
-          "enabled": true,
+          "enabled": false,
           "id": "weather-card"
         }
       ]
@@ -469,7 +469,9 @@
         "org.gnome.Nautilus",
         "firefox",
         "dev.zed.Zed",
-        "hiddify"
+        "hiddify",
+        "com.mitchellh.ghostty",
+        "AmneziaVPN"
       ],
       "colorizeIcons": false,
       "showLauncherIcon": false,
@@ -715,7 +717,7 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1774368607000
+      "lastSeenTs": 1774462797000
     },
     "changelogState": {
       "lastSeenVersion": ""

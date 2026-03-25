@@ -137,6 +137,7 @@
        nix-ld
     ] ++ [
       pkgsUnstable.keepassxc
+      pkgsUnstable.amnezia-vpn
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
