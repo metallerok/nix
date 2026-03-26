@@ -14,6 +14,10 @@
       inputs.home-manager.nixosModules.home-manager
     ];
 
+    nixpkgs.config = {
+      allowUnfree = true;
+    };
+
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
     programs.appimage = {
@@ -112,7 +116,11 @@
     home-manager.useUserPackages = true;
     home-manager.users.administrator = { pkgs, lib, ... }: {
         imports = [ ../../../home/administrator/default.nix ];
-        _module.args.pkgs-unstable = inputs.nixpkgs-unstable.legacyPackages.${system};
+
+        _module.args.pkgs-unstable = import inputs.nixpkgs-unstable {
+          system = pkgs.stdenv.hostPlatform.system;
+          config.allowUnfree = true;
+        };
     };
 
     programs.firefox.enable = true;
@@ -120,8 +128,6 @@
     programs.vim.defaultEditor = true;
     programs.amnezia-vpn.enable = true;
     programs.fish.enable = true;
-
-    nixpkgs.config.allowUnfree = true;
 
     # $ nix search wget
     environment.systemPackages = with pkgs; [

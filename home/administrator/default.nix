@@ -1,10 +1,8 @@
-{ config, pkgs, pkgs-unstable, ...}:
+{ config, pkgs, pkgs-unstable, ... }:
 let
   myHiddify = import ../../packages/hiddify.nix { inherit pkgs; };
 in
 {
-  home.stateVersion = "25.11";
-
   home.packages = with pkgs; [
     wl-clipboard
     python3
@@ -18,6 +16,7 @@ in
   ] ++ [
       pkgs-unstable.opencode
       pkgs-unstable.zed-editor
+      pkgs-unstable.megasync
   ];
 
   home.file.".local/share/applications/hiddify.desktop" = {
@@ -132,4 +131,6 @@ in
       # { name = "autopair"; src = pkgs.fishPlugins.autopair; }
     ];
   };
+
+  home.stateVersion = "25.11";
 }

@@ -5,16 +5,16 @@
       "barType": "simple",
       "position": "top",
       "monitors": [],
-      "density": "default",
+      "density": "comfortable",
       "showOutline": false,
       "showCapsule": true,
-      "capsuleOpacity": 1,
+      "capsuleOpacity": 0.9,
       "capsuleColorKey": "none",
-      "widgetSpacing": 6,
-      "contentPadding": 2,
-      "fontScale": 1,
+      "widgetSpacing": 10,
+      "contentPadding": 0,
+      "fontScale": 1.2000000000000002,
       "enableExclusionZoneInset": true,
-      "backgroundOpacity": 0.93,
+      "backgroundOpacity": 0,
       "useSeparateOpacity": true,
       "floating": false,
       "marginVertical": 4,
@@ -268,11 +268,11 @@
       "tooltipsEnabled": true,
       "scrollbarAlwaysVisible": true,
       "boxBorderEnabled": false,
-      "panelBackgroundOpacity": 0.93,
+      "panelBackgroundOpacity": 0.9500000000000001,
       "translucentWidgets": false,
       "panelsAttachedToBar": true,
-      "settingsPanelMode": "attached",
-      "settingsPanelSideBarCardStyle": false
+      "settingsPanelMode": "centered",
+      "settingsPanelSideBarCardStyle": true
     },
     "location": {
       "name": "Penza, Russia",
@@ -505,7 +505,7 @@
     },
     "sessionMenu": {
       "enableCountdown": true,
-      "countdownDuration": 10000,
+      "countdownDuration": 5000,
       "position": "center",
       "showHeader": true,
       "showKeybinds": true,
@@ -558,15 +558,15 @@
           "action": "rebootToUefi",
           "command": "",
           "countdownEnabled": true,
-          "enabled": true,
-          "keybind": "7"
+          "enabled": false,
+          "keybind": ""
         },
         {
           "action": "userspaceReboot",
           "command": "",
           "countdownEnabled": true,
-          "enabled": false,
-          "keybind": ""
+          "enabled": true,
+          "keybind": "7"
         }
       ]
     },
@@ -575,9 +575,9 @@
       "enableMarkdown": false,
       "density": "default",
       "monitors": [],
-      "location": "top_right",
+      "location": "top",
       "overlayLayer": true,
-      "backgroundOpacity": 1,
+      "backgroundOpacity": 0.8,
       "respectExpireTimeout": false,
       "lowUrgencyDuration": 3,
       "normalUrgencyDuration": 8,
@@ -598,7 +598,7 @@
         "excludedApps": "discord,firefox,chrome,chromium,edge"
       },
       "enableMediaToast": false,
-      "enableKeyboardLayoutToast": true,
+      "enableKeyboardLayoutToast": false,
       "enableBatteryToast": true
     },
     "osd": {
@@ -717,7 +717,7 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1774462797000
+      "lastSeenTs": 1774509061000
     },
     "changelogState": {
       "lastSeenVersion": ""

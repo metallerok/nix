@@ -36,11 +36,17 @@
           keyboard.repeat-delay = 250;
         };
 
+        window-rule = {
+          geometry-corner-radius = 5;
+          clip-to-geometry = true;
+          tiled-state = true;
+        };
+
         layout = {
-          gaps = 5;
+          gaps = 10;
 
           focus-ring = {
-            width = 2;
+            width = 3;
             active-color = "#fe8019";
           };
         };
