@@ -13,10 +13,14 @@ in
     # LSP
     nil
     nixd
+    # Docker
+    docker_29
   ] ++ [
       pkgs-unstable.opencode
       pkgs-unstable.zed-editor
       pkgs-unstable.megasync
+      pkgs-unstable.telegram-desktop
+      pkgs-unstable.bruno
   ];
 
   home.file.".local/share/applications/hiddify.desktop" = {

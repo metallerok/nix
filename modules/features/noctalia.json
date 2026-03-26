@@ -11,7 +11,7 @@
       "capsuleOpacity": 0.9,
       "capsuleColorKey": "none",
       "widgetSpacing": 10,
-      "contentPadding": 0,
+      "contentPadding": 10,
       "fontScale": 1.2000000000000002,
       "enableExclusionZoneInset": true,
       "backgroundOpacity": 0,
@@ -115,7 +115,9 @@
             "id": "Tray",
             "pinned": [
               "hiddify",
-              "AmneziaVPN"
+              "AmneziaVPN",
+              "MEGA 5.16.0\nLogging in",
+              "MEGA 5.16.0\nIssues detected"
             ]
           },
           {
@@ -317,9 +319,9 @@
       "fillColor": "#000000",
       "useSolidColor": false,
       "solidColor": "#1a1a2e",
-      "automationEnabled": false,
+      "automationEnabled": true,
       "wallpaperChangeMode": "random",
-      "randomIntervalSec": 300,
+      "randomIntervalSec": 900,
       "transitionDuration": 1500,
       "transitionType": "random",
       "skipStartupTransition": false,
@@ -696,7 +698,7 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/forest_castle.png"
+      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/dock.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -717,10 +719,10 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1774509061000
+      "lastSeenTs": 1774509928000
     },
     "changelogState": {
-      "lastSeenVersion": ""
+      "lastSeenVersion": "v4.6.7"
     },
     "colorSchemesList": {
       "schemes": [],

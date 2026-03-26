@@ -34,6 +34,13 @@
       enable = true;
     };
 
+    hardware = {
+      graphics.enable = true;
+      nvidia.open = false;
+    };
+
+    services.xserver.videoDrivers = [ "nvidia" ];
+
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
