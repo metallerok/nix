@@ -13,8 +13,8 @@ in
     # LSP
     nil
     nixd
-    # Docker
-    docker_29
+    gruvbox-dark-gtk
+    gruvbox-dark-icons-gtk
   ] ++ [
       pkgs-unstable.opencode
       pkgs-unstable.zed-editor

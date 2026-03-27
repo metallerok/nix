@@ -33,10 +33,25 @@
     programs.nix-ld = {
       enable = true;
     };
+    virtualisation.docker.enable = true;
+    virtualisation.docker.rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
 
     hardware = {
       graphics.enable = true;
       nvidia.open = false;
+    };
+
+    services.samba = {
+      enable = true;
+      openFirewall = true;
+    };
+
+    services.avahi = {
+      enable = true;
+      openFirewall = true;
     };
 
     services.xserver.videoDrivers = [ "nvidia" ];
@@ -113,7 +128,7 @@
     users.users.administrator = {
       isNormalUser = true;
       description = "Gosha";
-      extraGroups = [ "networkmanager" "wheel" ];
+      extraGroups = [ "networkmanager" "wheel" "docker" ];
       shell = pkgs.fish;
       packages = with pkgs; [
       ];
@@ -148,9 +163,12 @@
        alacritty
        fish
        nix-ld
+       deja-dup
+       strongswan
     ] ++ [
       pkgsUnstable.keepassxc
       pkgsUnstable.amnezia-vpn
+      pkgsUnstable.gnome-tweaks
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
