@@ -112,6 +112,11 @@
           "Mod+Ctrl+U".move-column-to-workspace-down = null;
           "Mod+Ctrl+I".move-column-to-workspace-up = null;
 
+          "Mod+WheelScrollRight".focus-column-right = null;
+          "Mod+WheelScrollLeft".focus-column-left = null;
+          "Mod+Ctrl+WheelScrollRight".move-column-right = null;
+          "Mod+Ctrl+WheelScrollLeft".move-column-left = null;
+
           "Mod+Shift+Page_Down".move-workspace-down = null;
           "Mod+Shift+Page_Up".move-workspace-up = null;
           "Mod+Shift+U".move-workspace-down = null;

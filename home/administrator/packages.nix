@@ -13,7 +13,7 @@ in
     # LSP
     nil
     nixd
-    gruvbox-dark-gtk
+    gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
   ] ++ [
       pkgs-unstable.opencode

@@ -185,6 +185,9 @@
             "icon": "noctalia",
             "id": "ControlCenter",
             "useDistroLogo": false
+          },
+          {
+            "id": "plugin:network-manager-vpn"
           }
         ]
       },
@@ -499,7 +502,7 @@
       "bluetoothRssiPollingEnabled": false,
       "bluetoothRssiPollIntervalMs": 60000,
       "networkPanelView": "wifi",
-      "wifiDetailsViewMode": "grid",
+      "wifiDetailsViewMode": "list",
       "bluetoothDetailsViewMode": "grid",
       "bluetoothHideUnnamedDevices": false,
       "disableDiscoverability": false,
@@ -698,7 +701,7 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/forest_castle.png"
+      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/future-town.jpg"
     },
     "desktopWidgetsEditMode": false,
     "display": {
