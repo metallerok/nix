@@ -13,6 +13,8 @@ in
     # LSP
     nil
     nixd
+    python3Packages.python-lsp-server
+    # Theme
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
   ] ++ [

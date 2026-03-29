@@ -232,6 +232,8 @@
        networkmanager-l2tp
        networkmanagerapplet
        openssl
+       direnv
+       gnumake
     ] ++ [
       pkgsUnstable.keepassxc
       pkgsUnstable.amnezia-vpn
