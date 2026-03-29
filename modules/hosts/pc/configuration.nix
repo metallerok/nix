@@ -46,8 +46,25 @@
 
     services.samba = {
       enable = true;
+      securityType = "user";
       openFirewall = true;
+
+      shares = {
+        shared = {
+          path = "/srv/samba/shared";
+          browseable = "yes";
+          "read only" = "no";
+          "guest ok" = "yes";
+          "create mask" = "0644";
+          "directory mask" = "0755";
+        };
+      };
     };
+
+    systemd.tmpfiles.rules = [
+      "d /srv/samba 0755 root root -"
+      "d /srv/samba/shared 0755 administrator administrator -"
+    ];
 
     services.avahi = {
       enable = true;
@@ -66,6 +83,11 @@
     # networking.proxy.default = "http://user:password@proxy:port/";
     # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
     #
+
+    # ==============================
+    # Strongswan
+    # ==============================
+    # Need reboot system to apply this changes
 
     security.pki.certificateFiles = [
       "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
@@ -170,9 +192,13 @@
       packages = with pkgs; [
       ];
     };
+    users.groups.administrator = {};
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
+    home-manager.extraSpecialArgs = {
+      inherit inputs;
+    };
     home-manager.users.administrator = { pkgs, lib, ... }: {
         imports = [ ../../../home/administrator/default.nix ];
 

@@ -1,12 +1,12 @@
-{ config, pkgs, pkgs-unstable, ... }: {
+{ config, pkgs, pkgs-unstable, inputs, ... }: {
   imports = [
     ./packages.nix
-    ./ghostty.nix
-    ./alacritty.nix
     ./git.nix
-    ./vim.nix
     ./fish.nix
-    ./theme.nix
+    inputs.self.homeModules.ghostty
+    inputs.self.homeModules.alacritty
+    inputs.self.homeModules.vim
+    inputs.self.homeModules.gruvbox-theme
   ];
 
   programs.bash = {

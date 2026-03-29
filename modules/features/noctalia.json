@@ -107,7 +107,9 @@
         ],
         "right": [
           {
-            "blacklist": [],
+            "blacklist": [
+              "nm-applet"
+            ],
             "chevronColor": "none",
             "colorizeIcons": false,
             "drawerEnabled": true,
@@ -185,9 +187,6 @@
             "icon": "noctalia",
             "id": "ControlCenter",
             "useDistroLogo": false
-          },
-          {
-            "id": "plugin:network-manager-vpn"
           }
         ]
       },
@@ -701,7 +700,7 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/future-town.jpg"
+      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/desk-gruvbox-material.jpg"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -722,7 +721,7 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1774509928000
+      "lastSeenTs": 1774632016000
     },
     "changelogState": {
       "lastSeenVersion": "v4.6.7"
