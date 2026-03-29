@@ -41,15 +41,18 @@
 
     hardware = {
       graphics.enable = true;
-      nvidia.open = false;
+      nvidia = {
+        open = false;
+        modesetting.enable = true;
+      };
     };
 
     services.samba = {
       enable = true;
-      securityType = "user";
       openFirewall = true;
 
-      shares = {
+      settings = {
+        global.security = "user";
         shared = {
           path = "/srv/samba/shared";
           browseable = "yes";
@@ -234,6 +237,7 @@
        openssl
        direnv
        gnumake
+       fastfetch
     ] ++ [
       pkgsUnstable.keepassxc
       pkgsUnstable.amnezia-vpn

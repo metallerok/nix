@@ -20,7 +20,13 @@
       passthru = {
         providedSessions = [ "niri" ];
       };
+
       settings = {
+        outputs = {
+          "HDMI-A-1" = {
+            mode = "3440x1440@99.992";
+          };
+        };
         spawn-at-startup = [
           [ (lib.getExe self'.packages.myNoctalia) ]
           # [ (lib.getExe self'.packages.myHiddify) ]
@@ -93,8 +99,8 @@
           "Mod+Ctrl+Up".move-window-up = null;
           "Mod+Ctrl+Right".move-column-right = null;
           "Mod+Ctrl+H".move-column-left = null;
-          "Mod+Ctrl+J".move-window-down = null;
-          "Mod+Ctrl+K".move-window-up = null;
+          "Mod+Ctrl+J".move-column-to-workspace-down = null;
+          "Mod+Ctrl+K".move-column-to-workspace-up = null;
           "Mod+Ctrl+L".move-column-right = null;
 
           "Mod+Home".focus-column-first = null;
@@ -105,17 +111,15 @@
 
           "Mod+Page_Down".focus-workspace-down = null;
           "Mod+Page_Up".focus-workspace-up = null;
-          "Mod+U".focus-workspace-down = null;
-          "Mod+I".focus-workspace-up = null;
           "Mod+Ctrl+Page_Down".move-column-to-workspace-down = null;
           "Mod+Ctrl+Page_Up".move-column-to-workspace-up = null;
           "Mod+Ctrl+U".move-column-to-workspace-down = null;
           "Mod+Ctrl+I".move-column-to-workspace-up = null;
 
-          "Mod+WheelScrollRight".focus-column-right = null;
-          "Mod+WheelScrollLeft".focus-column-left = null;
-          "Mod+Ctrl+WheelScrollRight".move-column-right = null;
-          "Mod+Ctrl+WheelScrollLeft".move-column-left = null;
+          "Mod+WheelScrollDown".focus-column-left = null;
+          "Mod+WheelScrollUp".focus-column-right = null;
+          "Mod+Ctrl+WheelScrollDown".focus-workspace-down = null;
+          "Mod+Ctrl+WheelScrollUp".focus-workspace-up = null;
 
           "Mod+Shift+Page_Down".move-workspace-down = null;
           "Mod+Shift+Page_Up".move-workspace-up = null;

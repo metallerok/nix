@@ -134,3 +134,8 @@ nix run github:NixOS/nixpkgs/nixos-unstable#noctalia-shell
 nix run .#myNoctalia ipc call state all > ./modules/features/noctalia.json
 nix run nixpkgs-unstable#noctalia-shell ipc call state all > ./modules/features/noctalia.json
 ```
+
+# Niri outputs
+```bash
+niri msg outputs
+```
