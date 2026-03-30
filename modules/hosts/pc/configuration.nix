@@ -245,6 +245,30 @@
       pkgsUnstable.uv
     ];
 
+    # disable hibernation
+    powerManagement.enable = true;
+
+    systemd = {
+      targets = {
+        sleep = {
+          enable = false;
+          unitConfig.DefaultDependencies = "no";
+        };
+        suspend = {
+          enable = false;
+          unitConfig.DefaultDependencies = "no";
+        };
+        hibernate = {
+          enable = false;
+          unitConfig.DefaultDependencies = "no";
+        };
+        "hybrid-sleep" = {
+          enable = false;
+          unitConfig.DefaultDependencies = "no";
+        };
+      };
+    };
+
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
     # programs.mtr.enable = true;
