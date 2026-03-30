@@ -238,9 +238,11 @@
        direnv
        gnumake
        fastfetch
+       pv
     ] ++ [
       pkgsUnstable.keepassxc
       pkgsUnstable.amnezia-vpn
+      pkgsUnstable.uv
     ];
 
     # Some programs need SUID wrappers, can be configured further or are
