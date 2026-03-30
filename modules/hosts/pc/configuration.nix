@@ -1,17 +1,19 @@
 { self, inputs, ... }: {
   flake.nixosModules.pcConfiguration = { pkgs, lib, ... }:
 	let
-	    system = pkgs.stdenv.hostPlatform.system;
-      pkgsUnstable = import inputs.nixpkgs-unstable {
-        system = pkgs.stdenv.hostPlatform.system;
-        config.allowUnfree = true;
-      };
+      system = pkgs.stdenv.hostPlatform.system;
 	in
   {
+    _module.args.pkgs-unstable = import inputs.nixpkgs-unstable {
+      system = pkgs.stdenv.hostPlatform.system;
+      config.allowUnfree = true;
+    };
+
     imports = [
       self.nixosModules.pcHardware
       self.nixosModules.niri
       inputs.home-manager.nixosModules.home-manager
+      self.nixosModules.programs
     ];
 
     nixpkgs.config = {
@@ -216,34 +218,6 @@
     programs.vim.defaultEditor = true;
     programs.amnezia-vpn.enable = true;
     programs.fish.enable = true;
-
-    # $ nix search wget
-    environment.systemPackages = with pkgs; [
-       wget
-       vim
-       git
-       curl
-       htop
-       tree
-       fuzzel
-       alacritty
-       fish
-       nix-ld
-       deja-dup
-       strongswan
-       networkmanager-strongswan
-       networkmanager-l2tp
-       networkmanagerapplet
-       openssl
-       direnv
-       gnumake
-       fastfetch
-       pv
-    ] ++ [
-      pkgsUnstable.keepassxc
-      pkgsUnstable.amnezia-vpn
-      pkgsUnstable.uv
-    ];
 
     # disable hibernation
     powerManagement.enable = true;

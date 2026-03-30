@@ -1,12 +1,7 @@
-{ self, inputs, pkgs, ... }: {
+{ self, inputs, ... }: {
 
   flake.nixosConfigurations.pc = inputs.nixpkgs.lib.nixosSystem {
-      specialArgs = {
-        pkgs-unstable = import inputs.nixpkgs-unstable {
-          system = pkgs.stdenv.hostPlatform.system;
-          config.allowUnfree = true;
-        };
-			};
+      specialArgs = {};
 
 	    modules = [
 	      self.nixosModules.pcConfiguration
