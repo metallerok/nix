@@ -27,5 +27,25 @@
       pkgs-unstable.amnezia-vpn
       pkgs-unstable.uv
     ];
+
+    programs.firefox.enable = true;
+    programs.vim.enable = true;
+    programs.vim.defaultEditor = true;
+    programs.amnezia-vpn.enable = true;
+    programs.fish.enable = true;
+
+    programs.appimage = {
+      enable = true;
+      binfmt = true;
+      package = pkgs.appimage-run.override {
+        extraPkgs = pkgs: with pkgs; [
+          zstd
+          libepoxy
+        ];
+      };
+    };
+    programs.nix-ld = {
+      enable = true;
+    };
   };
 }
