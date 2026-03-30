@@ -26,6 +26,7 @@
       self.nixosModules.fonts
       self.nixosModules.systemd
       self.nixosModules.sound
+      self.nixosModules.home-manager
     ];
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -61,19 +62,6 @@
     };
     users.groups.administrator = {};
 
-    home-manager.useGlobalPkgs = true;
-    home-manager.useUserPackages = true;
-    home-manager.extraSpecialArgs = {
-      inherit inputs;
-    };
-    home-manager.users.administrator = { pkgs, lib, ... }: {
-        imports = [ ../../../home/administrator/default.nix ];
-
-        _module.args.pkgs-unstable = import inputs.nixpkgs-unstable {
-          system = pkgs.stdenv.hostPlatform.system;
-          config.allowUnfree = true;
-        };
-    };
 
     # Some programs need SUID wrappers, can be configured further or are
     # started in user sessions.
