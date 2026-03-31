@@ -22,6 +22,8 @@
       gnumake
       fastfetch
       pv
+      nettools
+      bind
     ] ++ [
       pkgs-unstable.keepassxc
       pkgs-unstable.amnezia-vpn
