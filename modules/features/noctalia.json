@@ -118,8 +118,7 @@
             "pinned": [
               "hiddify",
               "AmneziaVPN",
-              "MEGA 5.16.0\nLogging in",
-              "MEGA 5.16.0\nIssues detected"
+              "Telegram Desktop"
             ]
           },
           {
@@ -700,8 +699,8 @@
     "openedPanel": "",
     "lockScreenActive": false,
     "wallpapers": {
-      "": "/home/administrator/Pictures/Wallpapers/landscape0.png",
-      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/landscape0.png"
+      "": "/home/administrator/Pictures/Wallpapers/ruins-2.png",
+      "HDMI-A-1": "/home/administrator/Pictures/Wallpapers/ruins-2.png"
     },
     "desktopWidgetsEditMode": false,
     "display": {
@@ -722,7 +721,7 @@
       }
     },
     "notificationsState": {
-      "lastSeenTs": 1774632016000
+      "lastSeenTs": 1774976766000
     },
     "changelogState": {
       "lastSeenVersion": "v4.6.7"

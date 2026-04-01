@@ -17,6 +17,7 @@ in
     # Theme
     gruvbox-gtk-theme
     gruvbox-dark-icons-gtk
+    bibata-cursors
   ] ++ [
       pkgs-unstable.opencode
       pkgs-unstable.zed-editor

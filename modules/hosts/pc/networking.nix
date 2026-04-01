@@ -1,5 +1,5 @@
 { self, inputs, ... }: {
-  flake.nixosModules.networking = { pkgs, ... }:
+  flake.nixosModules.networking = { pkgs, lib, ... }:
   {
     networking.hostName = "nixos"; # Define your hostname.
     # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -59,5 +59,11 @@
     # networking.firewall.allowedUDPPorts = [ ... ];
     # Or disable the firewall altogether.
     # networking.firewall.enable = false;
+
+    networking.extraHosts = ''
+      127.0.0.1 dev.loc
+      127.0.0.1 instance1.dev.loc
+      127.0.0.1 admin.dev.loc
+    '';
   };
 }

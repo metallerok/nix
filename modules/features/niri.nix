@@ -111,6 +111,8 @@
 
           "Mod+Page_Down".focus-workspace-down = null;
           "Mod+Page_Up".focus-workspace-up = null;
+          "Mod+I".focus-workspace-down = null;
+          "Mod+U".focus-workspace-up = null;
           "Mod+Ctrl+Page_Down".move-column-to-workspace-down = null;
           "Mod+Ctrl+Page_Up".move-column-to-workspace-up = null;
           "Mod+Ctrl+U".move-column-to-workspace-down = null;
