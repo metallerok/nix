@@ -10,6 +10,8 @@ in
     obsidian
     zellij
     myHiddify
+    gimp
+    libreoffice
     # LSP
     nil
     nixd

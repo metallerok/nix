@@ -5,6 +5,7 @@
     settings = {
       core = {
         editor = "vim";
+        merge.tool = "meld";
       };
       user = {
         name = "Georgiy";

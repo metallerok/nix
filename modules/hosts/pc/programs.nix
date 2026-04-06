@@ -24,6 +24,7 @@
       pv
       nettools
       bind
+      meld
     ] ++ [
       pkgs-unstable.keepassxc
       pkgs-unstable.amnezia-vpn
