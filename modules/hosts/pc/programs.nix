@@ -1,5 +1,5 @@
 { self, inputs, ... }: {
-  flake.nixosModules.programs = { pkgs, pkgs-unstable, lib, ... }:
+  flake.nixosModules.programs = { options, pkgs, pkgs-unstable, lib, ... }:
   {
     environment.systemPackages = with pkgs; [
       wget
@@ -25,6 +25,11 @@
       nettools
       bind
       meld
+      isoimagewriter
+      glib
+      gparted
+      glibc
+      transmission_4-gtk
     ] ++ [
       pkgs-unstable.keepassxc
       pkgs-unstable.amnezia-vpn
@@ -49,6 +54,31 @@
     };
     programs.nix-ld = {
       enable = true;
+      libraries = options.programs.nix-ld.libraries.default ++ (
+        with pkgs; [
+          glib
+          nspr
+          nss
+          dbus
+          atk
+          cups
+          cairo
+          gtk3
+          pango
+          libx11
+          libxcomposite
+          libxdamage
+          libxext
+          libxfixes
+          libxrandr
+          libgbm
+          expat
+          libxcb
+          libxkbcommon
+          alsa-lib
+          libGL
+        ]
+      );
     };
   };
 }
